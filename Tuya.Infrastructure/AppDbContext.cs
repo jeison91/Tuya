@@ -34,7 +34,7 @@ namespace Tuya.Infrastructure
 
             modelBuilder.Entity<ProductEntity>().HasData(
                 new ProductEntity { Id = 1, Name = "Café", Description = "AAA", UnitPrice = 25000, Active = true },
-                new ProductEntity { Id = 2, Name = "Arroz Prmium", Description = "BBB", UnitPrice = 6000, Active = true },
+                new ProductEntity { Id = 2, Name = "Arroz Premium", Description = "BBB", UnitPrice = 6000, Active = true },
                 new ProductEntity { Id = 3, Name = "Lentejas", Description = "CCC", UnitPrice = 4000, Active = false },
                 new ProductEntity { Id = 4, Name = "Frijoles", Description = "DDD", UnitPrice = 4500, Active = true },
                 new ProductEntity { Id = 5, Name = "Arroz", Description = "EEE", UnitPrice = 3500, Active = false },

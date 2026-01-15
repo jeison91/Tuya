@@ -20,6 +20,7 @@ namespace Tuya.Infrastructure.Repository
             if (pageNumber.HasValue && pageSize.HasValue)
             {
                 Employees = _context.Products.AsNoTracking()
+                    .Where(x => x.Active == true)
                     .OrderBy(x => x.Name)
                     .Skip((pageNumber.Value - 1) * pageSize.Value)
                     .Take(pageSize.Value);
@@ -27,6 +28,7 @@ namespace Tuya.Infrastructure.Repository
             else
             {
                 Employees = _context.Products.AsNoTracking()
+                    .Where(x => x.Active == true)
                     .OrderBy(x => x.Name);
             }
 

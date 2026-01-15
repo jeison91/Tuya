@@ -1,4 +1,5 @@
 using Tuya.Api.DI;
+using Tuya.Transversal.Exceptions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,12 +10,11 @@ builder.Services.AddControllers();
 DependencyInjection.AddRegistration(builder.Services, builder.Configuration);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddProblemDetails();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+//Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -26,7 +26,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors("politica");
-//app.UseMiddleware(typeof(ExceptionMiddleware));
+app.UseMiddleware(typeof(ExceptionMiddleware));
 
 app.UseAuthorization();
 

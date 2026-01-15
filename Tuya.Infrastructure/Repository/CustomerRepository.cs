@@ -37,7 +37,7 @@ namespace Tuya.Infrastructure.Repository
             _context.SaveChanges();
         }
 
-        public void Update(CustomerEntity entity)
+        public async Task Update(CustomerEntity entity)
         {
             _context.Customers.Update(entity);
             _context.SaveChanges();

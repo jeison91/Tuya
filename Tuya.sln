@@ -23,6 +23,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. Test", "5. Test", "{AAFE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tuya.Test", "Tuya.Test\Tuya.Test.csproj", "{2CD56513-7311-4426-BD9D-0B668A40A649}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6. Transversal", "6. Transversal", "{F9C0C1F7-4116-4BD4-8B26-67C8A476BB85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tuya.Transversal", "Tuya.Transversal\Tuya.Transversal.csproj", "{43DE9779-2025-4CE7-BBB4-D33FD732D47D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +53,10 @@ Global
 		{2CD56513-7311-4426-BD9D-0B668A40A649}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CD56513-7311-4426-BD9D-0B668A40A649}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CD56513-7311-4426-BD9D-0B668A40A649}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43DE9779-2025-4CE7-BBB4-D33FD732D47D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43DE9779-2025-4CE7-BBB4-D33FD732D47D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43DE9779-2025-4CE7-BBB4-D33FD732D47D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43DE9779-2025-4CE7-BBB4-D33FD732D47D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +67,7 @@ Global
 		{439D82EA-C36A-4B3F-87ED-6E57129DC534} = {005D8DC8-B862-4048-859D-7D1AD37D1393}
 		{0A35B0F0-0146-401B-A194-114071D58AFC} = {171704D6-6F0F-4A75-89C6-1FBE6EC1F4C2}
 		{2CD56513-7311-4426-BD9D-0B668A40A649} = {AAFE9202-1303-4E78-A91A-88420E06926A}
+		{43DE9779-2025-4CE7-BBB4-D33FD732D47D} = {F9C0C1F7-4116-4BD4-8B26-67C8A476BB85}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6BE79CBE-8552-4E54-A20F-AE1DA158CAF2}
