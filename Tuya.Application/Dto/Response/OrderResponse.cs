@@ -11,7 +11,7 @@ namespace Tuya.Application.Dto.Response
     {
         public int Id { get; set; }
         public int IdCustomer { get; set; }
-        public int CustomerName { get; set; }
+        public string CustomerName { get; set; }
         public DateTime OrderDate { get; set; }
         public required string Address { get; set; }
         public required string State { get; set; }

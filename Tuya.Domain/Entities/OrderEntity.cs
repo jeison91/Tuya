@@ -6,7 +6,7 @@
         public int IdCustomer { get; set; }
         public DateTime OrderDate { get; set; } = DateTime.Now;
         public required string Address { get; set; }
-        public required string State { get; set; } = string.Empty;
+        public string State { get; set; } = string.Empty;
         public decimal Total { get; set; }
 
         public CustomerEntity Customer { get; set; } = null!;
