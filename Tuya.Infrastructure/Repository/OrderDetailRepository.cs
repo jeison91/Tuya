@@ -17,12 +17,13 @@ namespace Tuya.Infrastructure.Repository
         public async Task Create(OrderDetailEntity entity)
         {
             await _context.OrderDetails.AddAsync(entity);
+            await _context.SaveChangesAsync();
         }
 
         public async Task Update(OrderDetailEntity entity)
         {
             _context.OrderDetails.Update(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

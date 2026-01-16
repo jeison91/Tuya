@@ -26,10 +26,10 @@ namespace Tuya.Infrastructure
 
             // Agregamos datos a la tablas maestras.
             modelBuilder.Entity<CustomerEntity>().HasData(
-                new CustomerEntity { Id = 1, Name = "Carlos Andres Perez", Address = "Carrera 1", CellPhone = "300 999 1234", Email = "Carlos@test.com" },
-                new CustomerEntity { Id = 2, Name = "Maria Camila Zuluaga", Address = "Carrera 50", CellPhone = "301 987 3216", Email = "Maria@test.com" },
-                new CustomerEntity { Id = 3, Name = "Daniela Castro", Address = "Avenida 10", CellPhone = "350 444 5465", Email = "Daniela@test.com" },
-                new CustomerEntity { Id = 4, Name = "Juan Camilo Munera", Address = "Calle 44", CellPhone = "301 951 3548", Email = "Juan@test.com" }
+                new CustomerEntity { Id = 1, Name = "Carlos Andres Perez", Address = "Carrera 1", CellPhone = "3009991234", Email = "Carlos@test.com" },
+                new CustomerEntity { Id = 2, Name = "Maria Camila Zuluaga", Address = "Carrera 50", CellPhone = "3019873216", Email = "Maria@test.com" },
+                new CustomerEntity { Id = 3, Name = "Daniela Castro", Address = "Avenida 10", CellPhone = "3504445465", Email = "Daniela@test.com" },
+                new CustomerEntity { Id = 4, Name = "Juan Camilo Munera", Address = "Calle 44", CellPhone = "3019513548", Email = "Juan@test.com" }
             );
 
             modelBuilder.Entity<ProductEntity>().HasData(

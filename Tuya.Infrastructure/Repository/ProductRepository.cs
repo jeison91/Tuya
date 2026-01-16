@@ -16,10 +16,10 @@ namespace Tuya.Infrastructure.Repository
 
         public async Task<List<ProductEntity>> GetAll(int? pageNumber = null, int? pageSize = null)
         {
-            IQueryable<ProductEntity> Employees;
+            IQueryable<ProductEntity> Products;
             if (pageNumber.HasValue && pageSize.HasValue)
             {
-                Employees = _context.Products.AsNoTracking()
+                Products = _context.Products.AsNoTracking()
                     .Where(x => x.Active == true)
                     .OrderBy(x => x.Name)
                     .Skip((pageNumber.Value - 1) * pageSize.Value)
@@ -27,12 +27,12 @@ namespace Tuya.Infrastructure.Repository
             }
             else
             {
-                Employees = _context.Products.AsNoTracking()
+                Products = _context.Products.AsNoTracking()
                     .Where(x => x.Active == true)
                     .OrderBy(x => x.Name);
             }
 
-            return await Employees.ToListAsync();
+            return await Products.ToListAsync();
         }
         public async Task<ProductEntity?> GetById(int Id)
             => await _context.Products.AsNoTracking().FirstOrDefaultAsync(x => x.Id == Id);

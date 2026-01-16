@@ -11,21 +11,21 @@ namespace Tuya.Infrastructure.Repository
 
         public async Task<List<CustomerEntity>> GetAll(int? pageNumber = null, int? pageSize = null)
         {
-            IQueryable<CustomerEntity> Employees;
+            IQueryable<CustomerEntity> Customers;
             if (pageNumber.HasValue && pageSize.HasValue)
             {
-                Employees = _context.Customers.AsNoTracking()
+                Customers = _context.Customers.AsNoTracking()
                     .OrderBy(x => x.Name)
                     .Skip((pageNumber.Value - 1) * pageSize.Value)
                     .Take(pageSize.Value);
             }
             else
             {
-                Employees = _context.Customers.AsNoTracking()
+                Customers = _context.Customers.AsNoTracking()
                     .OrderBy(x => x.Name);
             }
 
-            return await Employees.ToListAsync();
+            return await Customers.ToListAsync();
         }
 
         public async Task<CustomerEntity?> GetById(int Id)

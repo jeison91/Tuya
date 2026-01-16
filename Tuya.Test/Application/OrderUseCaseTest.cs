@@ -22,17 +22,13 @@ namespace Tuya.Test.Application
     public class OrderUseCaseTest
     {
         private readonly Mock<IOrderRepository> _mockIOrderRepository;
-        private readonly Mock<IOrderDetailRepository> _mockIOrderDetailRepository;
         private readonly Mock<IMapper> _mockIMapper;
-        private readonly Mock<IUnitOfWork> _mockIUnitOfWork;
         private readonly OrderUseCase _orderUseCase;
         public OrderUseCaseTest()
         {
             _mockIOrderRepository = new();
-            _mockIOrderDetailRepository = new();
             _mockIMapper = new();
-            _mockIUnitOfWork = new();
-            _orderUseCase = new(_mockIOrderRepository.Object, _mockIOrderDetailRepository.Object, _mockIMapper.Object, _mockIUnitOfWork.Object);
+            _orderUseCase = new(_mockIOrderRepository.Object, _mockIMapper.Object);
         }
 
         [Fact]
@@ -50,17 +46,13 @@ namespace Tuya.Test.Application
             };
 
             _mockIMapper.Setup(m => m.Map<OrderEntity>(request)).Returns(entity);
-
             _mockIOrderRepository.Setup(x => x.Create(entity)).Returns(Task.CompletedTask);
-
-            _mockIUnitOfWork.Setup(x => x.SaveChangesAsync(It.IsAny<CancellationToken>())).ReturnsAsync(1);
 
             // Act
             await _orderUseCase.Add(request);
 
             // Assert
             _mockIOrderRepository.Verify(r => r.Create(entity), Times.Once);
-            _mockIUnitOfWork.Verify(u => u.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
         }
 
         [Fact]
@@ -107,10 +99,10 @@ namespace Tuya.Test.Application
             _mockIMapper.Setup(m => m.Map<List<OrderResponse>>(It.IsAny<List<OrderEntity>>())).Returns([orderResponse]);
 
             // Act
-            var result = await _orderUseCase.GetAll();
+            var result = await _orderUseCase.GetAll(1, 10);
 
             Assert.Single(result);
-            _mockIOrderRepository.Verify(r => r.GetAll(null, null), Times.Once);
+            _mockIOrderRepository.Verify(r => r.GetAll(1, 10), Times.Once);
         }
 
         [Fact]
@@ -235,7 +227,7 @@ namespace Tuya.Test.Application
         }
 
         [Fact]
-        public async Task FinishOrder_Order_StateFinish()
+        public async Task FinishOrder_Order_StateCancel()
         {
             // Arrange
             int id = 100;
@@ -245,7 +237,7 @@ namespace Tuya.Test.Application
                 IdCustomer = 1,
                 OrderDate = DateTime.Now,
                 Address = "Calle 60",
-                State = Helpers.GetDescription(StateOrder.FINISH),
+                State = Helpers.GetDescription(StateOrder.CANCEL),
                 Total = 56000,
                 OrderDetails =
                 [
@@ -260,7 +252,7 @@ namespace Tuya.Test.Application
             var exception = await Assert.ThrowsAsync<BadRequestException>(() => _orderUseCase.FinishOrder(id));
 
             // Assert
-            Assert.Contains("La orden ya fue finalizada.", exception.Message);
+            Assert.Contains("La orden ya fue cancelada, no se puede finalizar", exception.Message);
         }
 
         [Fact]

@@ -101,10 +101,10 @@ namespace Tuya.Test.Application
             _mockIMapper.Setup(m => m.Map<List<CustomerResponse>>(It.IsAny<List<CustomerEntity>>())).Returns([customerResponse]);
 
             // Act
-            var result = await _customerUseCase.GetAll();
+            var result = await _customerUseCase.GetAll(1, 10);
 
             Assert.Single(result);
-            _mockICustomerRepository.Verify(r => r.GetAll(null, null), Times.Once);
+            _mockICustomerRepository.Verify(r => r.GetAll(1, 10), Times.Once);
         }
 
         [Fact]

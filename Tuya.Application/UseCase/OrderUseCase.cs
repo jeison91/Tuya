@@ -13,8 +13,7 @@ using Tuya.Transversal.ResponseModel;
 
 namespace Tuya.Application.UseCase
 {
-    public class OrderUseCase(IOrderRepository _orderRepository, IOrderDetailRepository _orderDetailRepository, IMapper _mapper,
-        IUnitOfWork _unitofWork) : IOrderService
+    public class OrderUseCase(IOrderRepository _orderRepository, IMapper _mapper) : IOrderService
     {
         public async Task Add(OrderRequest orderRequest)
         {
@@ -24,8 +23,6 @@ namespace Tuya.Application.UseCase
 
             order.State = Helpers.GetDescription(StateOrder.PROCESS);
             await _orderRepository.Create(order);
-            await InsertDetail(order);
-            await _unitofWork.SaveChangesAsync();
         }
 
         public async Task<List<OrderResponse>> GetAll(int? pageNumber = null, int? pageSize = null)
@@ -45,10 +42,10 @@ namespace Tuya.Application.UseCase
 
         public async Task FinishOrder(int Id)
         {
-            var order = await _orderRepository.GetById(Id) ?? 
+            var order = await _orderRepository.GetById(Id) ??
                 throw new BadRequestException(JsonSerializer.Serialize(new MessageResponse() { Status = 400, Message = $"La orden no existe." }));
-            if (order.State == Helpers.GetDescription(StateOrder.FINISH))
-                throw new BadRequestException(JsonSerializer.Serialize(new MessageResponse() { Status = 400, Message = $"La orden ya fue finalizada." }));
+            if (order.State == Helpers.GetDescription(StateOrder.CANCEL))
+                throw new BadRequestException(JsonSerializer.Serialize(new MessageResponse() { Status = 400, Message = $"La orden ya fue cancelada, no se puede finalizar." }));
 
             order.State = Helpers.GetDescription(StateOrder.FINISH);
             await _orderRepository.Update(order);
@@ -56,22 +53,13 @@ namespace Tuya.Application.UseCase
 
         public async Task CancelOrder(int Id)
         {
-            var order = await _orderRepository.GetById(Id) ?? 
+            var order = await _orderRepository.GetById(Id) ??
                 throw new BadRequestException(JsonSerializer.Serialize(new MessageResponse() { Status = 400, Message = $"La orden no existe." }));
             if (order.State == Helpers.GetDescription(StateOrder.FINISH))
                 throw new BadRequestException(JsonSerializer.Serialize(new MessageResponse() { Status = 400, Message = $"La orden ya fue finalizada, no se puede cancelar." }));
 
             order.State = Helpers.GetDescription(StateOrder.CANCEL);
             await _orderRepository.Update(order);
-        }
-
-        private async Task InsertDetail(OrderEntity orderEntity)
-        {
-            OrderDetailEntity orderDetail = new()
-            {
-                OrderId = orderEntity.Id
-            };
-            await _orderDetailRepository.Create(orderDetail);
         }
     }
 }

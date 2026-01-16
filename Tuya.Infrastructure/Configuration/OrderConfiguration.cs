@@ -17,6 +17,7 @@ namespace Tuya.Infrastructure.Configuration
             builder.HasKey(x => x.Id);
             builder.Property(x => x.OrderDate).IsRequired();
             builder.Property(x => x.Address).HasMaxLength(100).IsRequired();
+            builder.Property(x => x.State).HasMaxLength(20).IsRequired();
             builder.Property(x => x.Total).HasColumnType("decimal(18,2)").IsRequired();
 
             builder.HasOne(x => x.Customer)

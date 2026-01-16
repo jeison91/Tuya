@@ -15,7 +15,7 @@ namespace Tuya.Infrastructure.Configuration
         {
             builder.ToTable("Customers");
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).IsRequired().ValueGeneratedNever();
+            builder.Property(x => x.Id).ValueGeneratedNever();
             builder.Property(x => x.Name).HasMaxLength(100).IsRequired(true);
             builder.Property(x => x.Address).HasMaxLength(100).IsRequired();
             builder.Property(x => x.CellPhone).HasMaxLength(10).IsRequired();
